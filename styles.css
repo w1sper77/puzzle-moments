@@ -98,7 +98,7 @@ button:active { transform: scale(.97); }
 .cell.preview { background: rgba(255,184,101,.18); box-shadow: inset 0 0 0 2px rgba(255,184,101,.55); }
 .cell.hint-target { animation: pulse 1s ease-in-out infinite; }
 .ghost-layer { position: absolute; inset: 6px 12px; pointer-events: none; }
-.piece { position: absolute; width: var(--cell); height: var(--cell); background-size: calc(var(--board) * 1); background-position: calc(var(--bgx) * var(--board)) calc(var(--bgy) * var(--board)); border-radius: 4px; box-shadow: 0 1px 6px rgba(0,0,0,.22); will-change: transform; transition: transform var(--anim,150ms) ease, filter .18s, box-shadow .18s; }
+.piece { position: absolute; width: var(--cell); height: var(--cell); background-size: calc(var(--board) * 1); background-position: calc(var(--bgx) * var(--board)) calc(var(--bgy) * var(--board)); border-radius: 4px; box-shadow: 0 1px 6px rgba(0,0,0,.22); will-change: transform; transition: transform var(--anim,150ms) ease, filter .18s, box-shadow .18s; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
 .piece.locked { box-shadow: 0 0 0 2px rgba(255,255,255,.18), 0 1px 3px rgba(0,0,0,.2); }
 .piece.dragging { transition: none; z-index: 99; filter: drop-shadow(0 12px 18px rgba(0,0,0,.38)); }
 .piece.flash { filter: grayscale(1) brightness(.55); }

@@ -458,6 +458,10 @@
       playSound('pick');
       const pieceEl = makeDragElement(pieceId);
       dragState = { pointerId: event.pointerId, pieceId, origin: el, dragEl: pieceEl, startX: event.clientX, startY: event.clientY, moved: false };
+      try {
+        el.setPointerCapture(event.pointerId);
+        dragState.pointerCaptured = true;
+      } catch (_) {}
       el.classList.add('grabbed');
       moveDrag(event.clientX, event.clientY);
     });
@@ -498,6 +502,9 @@
   function cancelDrag(countMove) {
     if (!dragState) return;
     const { dragEl, origin, pieceId } = dragState;
+    if (dragState.pointerCaptured && dragState.pointerId != null) {
+      try { origin.releasePointerCapture(dragState.pointerId); } catch (_) {}
+    }
     dragEl.remove();
     origin.classList.remove('grabbed');
     dragState = null;
@@ -508,6 +515,7 @@
   window.addEventListener('pointermove', event => {
     if (!dragState) return;
     if (event.pointerId !== dragState.pointerId) return;
+    event.preventDefault();
     if (Math.hypot(event.clientX - dragState.startX, event.clientY - dragState.startY) > CONFIG.moveThreshold) dragState.moved = true;
     moveDrag(event.clientX, event.clientY);
   }, { passive: false });
@@ -515,6 +523,9 @@
   window.addEventListener('pointerup', event => {
     if (!dragState || event.pointerId !== dragState.pointerId) return;
     const { dragEl, origin, pieceId, candidate } = dragState;
+    if (dragState.pointerCaptured) {
+      try { origin.releasePointerCapture(event.pointerId); } catch (_) {}
+    }
     startTimerIfNeeded();
     game.moves++;
     dragState = null;
