@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#20242e">
+  <title>拼图片刻</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23f0b06a'/><path d='M16 24h12v-8a6 6 0 0112 0v8h12v12h-8a6 6 0 000 12h8v12H16z' fill='%23fff' opacity='.9'/></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Home -->
+    <section id="home" class="screen active" aria-label="首页">
+      <div class="hero">
+        <div class="logo-mark">拼</div>
+        <h1>拼图片刻</h1>
+        <p>从混乱到完整的确定成就感</p>
+      </div>
+      <button id="continue-card" class="continue-card hidden" type="button"></button>
+      <div class="home-actions">
+        <button class="primary" id="open-album" type="button">开始拼图</button>
+        <button class="ghost" id="open-settings" type="button">设置</button>
+      </div>
+      <div class="home-stats">
+        <div><strong id="total-stars">0</strong><span>累计星数</span></div>
+        <div><strong id="best-count">0</strong><span>最佳记录</span></div>
+        <div><strong id="unlock-count">1/12</strong><span>已解锁</span></div>
+      </div>
+      <p class="legal-note">离线可玩 · 本地保存进度 · 无体力 · 无失败惩罚</p>
+    </section>
+
+    <!-- Album -->
+    <section id="album" class="screen" aria-label="图册">
+      <header class="screen-header"><button class="icon-btn back" data-back="home">‹</button><h2>图册</h2><span id="album-stars"></span></header>
+      <div id="album-body" class="scroll-body"></div>
+    </section>
+
+    <!-- Image select -->
+    <section id="imageSelect" class="screen" aria-label="选择难度">
+      <header class="screen-header"><button class="icon-btn back" data-back="album">‹</button><h2 id="select-title">选择玩法</h2><span></span></header>
+      <div class="scroll-body select-image">
+        <div id="select-preview" class="select-preview"></div>
+        <div id="select-mode" class="mode-grid"></div>
+        <div id="best-list" class="best-list"></div>
+      </div>
+    </section>
+
+    <!-- Game -->
+    <section id="game" class="screen" aria-label="拼图">
+      <header class="game-top">
+        <button class="icon-btn" id="game-exit">‹</button>
+        <div class="game-meta"><span id="game-title">拼图</span><span id="game-mode">经典 3×3</span></div>
+        <button class="icon-btn" id="btn-pause">‖</button>
+      </header>
+      <div class="game-stats">
+        <div><span>用时</span><strong id="stat-time">0:00</strong></div>
+        <div><span>步数</span><strong id="stat-moves">0</strong></div>
+        <div><span>完整度</span><strong id="stat-progress">0%</strong></div>
+      </div>
+      <main id="board-wrap" class="board-wrap">
+        <div id="board" class="board"></div>
+        <div id="ghost-layer" class="ghost-layer"></div>
+      </main>
+      <div id="tray-zone" class="tray-zone"><div id="tray" class="tray"></div></div>
+      <footer class="game-actions">
+        <button class="tool" id="btn-ghost">底图</button>
+        <button class="tool" id="btn-hint">提示 <b id="hint-count">3</b></button>
+        <button class="tool" id="btn-restart">重开</button>
+      </footer>
+      <div id="particles" class="particles"></div>
+    </section>
+  </div>
+
+  <!-- Overlays -->
+  <div id="overlay" class="overlay hidden" aria-modal="true">
+    <div id="overlay-card" class="overlay-card"></div>
+  </div>
+  <div id="toast" class="toast"></div>
+  <div id="rotate-overlay" class="rotate-overlay"><div>请竖屏游玩</div></div>
+
+  <script src="assets.js"></script>
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
